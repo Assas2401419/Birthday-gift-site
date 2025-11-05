@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Happy+Monkey">
 </head>
 <body>
+    <div id="confetti-container"></div>
     <header>
-        <h1 id="title">&#127882;Today is Nick's birthday &#127882;</h1>
-        <img id="birthday-image" src="Images/AI Image.png" alt="A mixed model close up">
-        <h2 id="bday-age">24 years old</h2>
-        <h4 id="bday-date">01.11.2022</h4>
+        <h1 id="title">&#127882;Today is Your birthday Dun! &#127882;</h1>
+        <img id="birthday-image" src="Images/Dun.jpeg" alt="A mixed model close up">
+        <h2 id="bday-age">23 years old</h2>
+        <h4 id="bday-date">05.11.2002</h4>
     </header>
     
-    <audio id="birthday-music" src="Images/LucaFrancini_CuteHappyBirthdaySong_Instrumental.wav" autoplay></audio>
+    <audio id="birthday-music" src="Images/LucaFrancini_CuteHappyBirthdaySong_Instrumental.wav" loop></audio>
+    <button id="music-toggle" class="music-button">🎵 Play Birthday Music</button>
     <div class="gift-section">
         <h2 class="gift-title">Here's what I want for you</h2>
         <h3 class="gift-instruction">(Hover over the gift to find out more)</h3>
@@ -39,8 +41,124 @@
         <div class="gift-image" id="gift-image5"></div>
     </div>
     <footer>
-        <p>Created by Assas with ❤️ in <a href="https://www.codecademy.com/" target="_blank">Codecademy</a></p>
+        <p>Created by Assas with ❤️</p>
     </footer>
     
+    <script>
+        // Confetti burst animation with pop-up effect
+        function createConfettiBurst() {
+            const confettiContainer = document.getElementById('confetti-container');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#ff9f43', '#ee5a6f', '#0abde3'];
+            
+            // Add pop-up effect to container
+            confettiContainer.classList.add('burst-active');
+            
+            // Create multiple explosive bursts from center
+            for (let burst = 0; burst < 4; burst++) {
+                setTimeout(() => {
+                    for (let i = 0; i < 60; i++) {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'confetti-burst';
+                        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        
+                        // Start from center of screen
+                        confetti.style.left = '50%';
+                        confetti.style.top = '50%';
+                        
+                        // Random angle for explosive burst direction
+                        const angle = (Math.PI * 2 * i) / 60 + (Math.random() - 0.5) * 0.8;
+                        const velocity = Math.random() * 400 + 250;
+                        
+                        // Calculate explosive end position
+                        const endX = Math.cos(angle) * velocity;
+                        const endY = Math.sin(angle) * velocity;
+                        
+                        confetti.style.setProperty('--end-x', endX + 'px');
+                        confetti.style.setProperty('--end-y', endY + 'px');
+                        
+                        // Random size and shape for variety
+                        const size = Math.random() * 12 + 6;
+                        confetti.style.width = size + 'px';
+                        confetti.style.height = size + 'px';
+                        
+                        // Mix of shapes
+                        if (Math.random() > 0.6) {
+                            confetti.style.borderRadius = '50%';
+                        } else if (Math.random() > 0.3) {
+                            confetti.style.borderRadius = '2px';
+                        }
+                        
+                        confetti.style.animationDelay = Math.random() * 0.2 + 's';
+                        confetti.style.animationDuration = (Math.random() * 1.5 + 2.5) + 's';
+                        
+                        confettiContainer.appendChild(confetti);
+                    }
+                }, burst * 150);
+            }
+            
+            // Remove confetti and reset container after animation
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+                confettiContainer.classList.remove('burst-active');
+            }, 6000);
+        }
+        
+        // Trigger confetti burst when page loads
+        window.addEventListener('load', () => {
+            setTimeout(createConfettiBurst, 800);
+        });
+        
+        // Audio control function
+        function toggleMusic() {
+            const audio = document.getElementById('birthday-music');
+            const button = document.getElementById('music-toggle');
+            
+            if (audio.paused) {
+                audio.play().then(() => {
+                    button.textContent = '🔇 Stop Music';
+                    button.classList.add('playing');
+                }).catch(error => {
+                    console.log('Audio play failed:', error);
+                    button.textContent = '🎵 Audio Error';
+                });
+            } else {
+                audio.pause();
+                button.textContent = '🎵 Play Birthday Music';
+                button.classList.remove('playing');
+            }
+        }
+
+        // Auto-play attempt with fallback
+        function attemptAutoplay() {
+            const audio = document.getElementById('birthday-music');
+            const button = document.getElementById('music-toggle');
+            
+            audio.play().then(() => {
+                button.textContent = '🔇 Stop Music';
+                button.classList.add('playing');
+            }).catch(() => {
+                // Autoplay blocked, show play button
+                button.style.display = 'block';
+            });
+        }
+
+        // Add click event to birthday image for more confetti bursts
+        document.addEventListener('DOMContentLoaded', () => {
+            const birthdayImage = document.getElementById('birthday-image');
+            const musicButton = document.getElementById('music-toggle');
+            
+            birthdayImage.addEventListener('click', createConfettiBurst);
+            musicButton.addEventListener('click', toggleMusic);
+            
+            // Add hover events to all gift boxes
+            const giftBoxes = document.querySelectorAll('.gift-image');
+            giftBoxes.forEach(giftBox => {
+                giftBox.addEventListener('mouseenter', createConfettiBurst);
+            });
+            
+            // Try to autoplay after a short delay
+            setTimeout(attemptAutoplay, 1000);
+        });
+    </script>
 </body>
 </html>

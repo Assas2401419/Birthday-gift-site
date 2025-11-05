@@ -5,47 +5,128 @@
 body {
     font-family: "happy monkey", sans-serif;
     text-align: center;
-    background: linear-gradient(#13afe4, #ff5876);
-    /*background-color: #a2d2ff;*/
+    background: linear-gradient(45deg, #13afe4, #ff5876, #ffd93d, #6bcf7f);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
     color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
 
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 header{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 #birthday-image {
-    width: 400px;
-    height: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 50%;
-    border: 10px solid #EFB0C9;
+    border: 8px solid #EFB0C9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+}
+
+#birthday-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 #title {
     font-family: "honey belly", sans-serif;
+    font-size: 2.5rem;
+    margin: 20px 0;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
 }
 h1,h2,h4, h3,p {
-    text-shadow: 0px 0px 2px #000000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 #bday-age{
-    background: #EFB0C9;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin: 10px 0px 10px 0px;
+    background: linear-gradient(45deg, #EFB0C9, #ff9ec7);
+    padding: 12px 20px;
+    border-radius: 25px;
+    margin: 15px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(239, 176, 201, 0.4);
+    transition: transform 0.3s ease;
 }
+
+#bday-age:hover {
+    transform: scale(1.05);
+}
+
 #bday-date{
-    background: #EFB0C9;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin: 0px;
+    background: linear-gradient(45deg, #EFB0C9, #ff9ec7);
+    padding: 10px 18px;
+    border-radius: 20px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(239, 176, 201, 0.4);
+    transition: transform 0.3s ease;
+}
+
+#bday-date:hover {
+    transform: scale(1.05);
 }
 .gift-image {
-    width: 400px;
-    height: 400px;
-    border-radius: 5px;
+    width: 350px;
+    height: 350px;
+    border-radius: 15px;
     border: 6px solid #fff0f3;
     background-image: url("Images/Gift Pattern.jpg");
     background-size: cover;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.gift-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.gift-image:hover::before {
+    transform: translateX(100%);
+}
+
+.gift-image:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 #gift-image5 {
     height: 200px;
@@ -55,32 +136,233 @@ h1,h2,h4, h3,p {
 }
 
 #gift-image2:hover{
-    background-image: url("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDQ1aWtwcThtdjFxeHJ5d3N2cnQzMzhuYmQ1cWN2Zm5vZHRkb282aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3PzmBpZt0iimrcWvfV/giphy.gif");
+    background-image: url("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmRoajJ6Zm9sMXYwcHpndWV2cDIzcTBzYzgybm13bGMxNTFnbm5pZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nzN2LHb76uPgwDaaq8/giphy.gif");
 }
 #gift-image3:hover{
-    background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTk4OWVwNmlkdnFkZ3lydTA4M29tankweHVpZW42NzUwNWtzNmg0bCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/11qCjC856PSmnm/giphy.gif");
+    background-image: url("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHo0Y3ptaHUxMmcxNjZkMHF0NmNobHZlbWNhY2diMG83aGE3ZDQzOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JAReElUaBqUPf1vwt9/giphy.gif");
 }
 #gift-image4:hover{
-    background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnR1N2F4aGFudzBodzh6emJxbDR5YXhoZzF1NHk5dmc4dXM5bDF4diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3ov9jWu7BuHufyLs7m/giphy.gif");
+    background-image: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDh4MTdpcWhhYWRxcHN1Y2lxNWp2eDl4cWs5MXp3djdmNW9oYXcwNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o3dmaqvQzV1st84T0w/giphy.gif");
 }
 #gift-image5:hover{
     background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTl1dTAzYWRzYW12bHU3cDZkdDdwZDQxYzQ3azRlbDVoczBudWI0ciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BPJmthQ3YRwD6QqcVD/giphy.gif");
 }
 .gift-section {
-    margin-top: 50px;
+    margin: 60px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    max-width: 500px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.gift-section:hover {
+    transform: translateY(-5px);
 }
 .gift-title{
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: bold;
 }
 .gift-instruction{
     margin-top: 0px;
+    font-style: italic;
+    opacity: 0.9;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 0.6; }
 }
 footer{
-    margin-top: 50px auto;
+    margin: 80px auto 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    max-width: 400px;
 }
+
 a{
     color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffd93d;
+    text-shadow: 0 0 10px rgba(255, 217, 61, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #title {
+        font-size: 2rem;
+    }
+    
+    #birthday-image {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .gift-image {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .gift-section {
+        margin: 40px 20px;
+        padding: 20px;
+    }
+    
+    header {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+/* Confetti Burst Animation */
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.confetti-burst {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff6b6b;
+    animation: confetti-burst-out ease-out forwards;
+    transform-origin: center;
+    border-radius: 2px;
+}
+
+@keyframes confetti-burst-out {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    10% {
+        transform: translate(-50%, -50%) scale(1.5) rotate(90deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--end-x)), calc(-50% + var(--end-y))) scale(0.2) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Alternative burst animation for variety */
+.confetti-burst:nth-child(even) {
+    animation: confetti-burst-spin ease-out forwards;
+}
+
+@keyframes confetti-burst-spin {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    15% {
+        transform: translate(-50%, -50%) scale(1.8) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--end-x)), calc(-50% + var(--end-y))) scale(0.1) rotate(1080deg);
+        opacity: 0;
+    }
+}
+
+/* Pop-up effect for dramatic entrance */
+#confetti-container.burst-active {
+    animation: container-pop 0.4s ease-out;
+}
+
+@keyframes container-pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Make birthday image cursor pointer to indicate it's clickable */
+#birthday-image {
+    cursor: pointer;
+}
+
+#birthday-image:active {
+    transform: scale(0.95);
+}/* Mu
+sic Control Button */
+.music-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    display: none;
+    font-family: inherit;
+}
+
+.music-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.music-button:active {
+    transform: scale(0.95);
+}
+
+.music-button.playing {
+    background: linear-gradient(45deg, #ff9f43, #ee5a6f);
+    animation: pulse-music 2s ease-in-out infinite;
+}
+
+@keyframes pulse-music {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 0 6px 25px rgba(255, 159, 67, 0.5);
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .music-button {
+        top: 10px;
+        right: 10px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
 }

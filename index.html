@@ -20,9 +20,15 @@
     <button id="music-toggle" class="music-button">🎵 Play Birthday Music</button>
     <div class="gift-section">
         <h2 class="gift-title">Here's what I want for you</h2>
-        <h3 class="gift-instruction">(Hover over the gift to find out more)</h3>
+        <h3 class="gift-instruction">
+            <span class="desktop-instruction">(Hover over the gift to find out more)</span>
+            <span class="mobile-instruction">(Tap the gift to find out more)</span>
+        </h3>
         <div class="gift-image" id="gift-image1"></div>
-        <h4>Hover over me</h4>
+        <h4>
+            <span class="desktop-instruction">Hover over me</span>
+            <span class="mobile-instruction">Tap me</span>
+        </h4>
     </div>
     <div class="gift-section">
         <h2 class="gift-title">How people react when you enter the room &#128522;</h2>
@@ -142,6 +148,16 @@
             });
         }
 
+        // Mobile detection
+        function isMobile() {
+            return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Toggle gift reveal for mobile
+        function toggleGiftReveal(giftBox) {
+            giftBox.classList.toggle('mobile-revealed');
+        }
+
         // Add click event to birthday image for more confetti bursts
         document.addEventListener('DOMContentLoaded', () => {
             const birthdayImage = document.getElementById('birthday-image');
@@ -150,10 +166,27 @@
             birthdayImage.addEventListener('click', createConfettiBurst);
             musicButton.addEventListener('click', toggleMusic);
             
-            // Add hover events to all gift boxes
+            // Add events to all gift boxes
             const giftBoxes = document.querySelectorAll('.gift-image');
             giftBoxes.forEach(giftBox => {
+                // Always add hover for confetti
                 giftBox.addEventListener('mouseenter', createConfettiBurst);
+                
+                // Add tap functionality for mobile
+                giftBox.addEventListener('click', (e) => {
+                    if (isMobile()) {
+                        e.preventDefault();
+                        toggleGiftReveal(giftBox);
+                    }
+                    createConfettiBurst();
+                });
+                
+                // Add touch events for better mobile experience
+                giftBox.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    toggleGiftReveal(giftBox);
+                    createConfettiBurst();
+                });
             });
             
             // Try to autoplay after a short delay

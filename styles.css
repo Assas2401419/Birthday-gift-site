@@ -365,4 +365,86 @@ sic Control Button */
         padding: 10px 16px;
         font-size: 14px;
     }
+}/* Mobil
+e tap-to-reveal functionality */
+@media (max-width: 768px) {
+    /* Hide desktop instructions, show mobile instructions */
+    .desktop-instruction {
+        display: none;
+    }
+    
+    .mobile-instruction {
+        display: inline;
+    }
+    
+    /* Mobile gift reveal states */
+    .gift-image.mobile-revealed#gift-image1 {
+        background-image: url("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGY0dGgwbm40ODhmNXpkMnlxa3FvZm4wcmtrbG5lM2t1cG5oYm5yOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9rO5Aksmn0dHQKXJAu/giphy.gif") !important;
+    }
+    
+    .gift-image.mobile-revealed#gift-image2 {
+        background-image: url("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmRoajJ6Zm9sMXYwcHpndWV2cDIzcTBzYzgybm13bGMxNTFnbm5pZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nzN2LHb76uPgwDaaq8/giphy.gif") !important;
+    }
+    
+    .gift-image.mobile-revealed#gift-image3 {
+        background-image: url("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHo0Y3ptaHUxMmcxNjZkMHF0NmNobHZlbWNhY2diMG83aGE3ZDQzOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JAReElUaBqUPf1vwt9/giphy.gif") !important;
+    }
+    
+    .gift-image.mobile-revealed#gift-image4 {
+        background-image: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDh4MTdpcWhhYWRxcHN1Y2lxNWp2eDl4cWs5MXp3djdmNW9oYXcwNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o3dmaqvQzV1st84T0w/giphy.gif") !important;
+    }
+    
+    .gift-image.mobile-revealed#gift-image5 {
+        background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTl1dTAzYWRzYW12bHU3cDZkdDdwZDQxYzQ3azRlbDVoczBudWI0ciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BPJmthQ3YRwD6QqcVD/giphy.gif") !important;
+    }
+    
+    /* Add visual feedback for mobile taps */
+    .gift-image {
+        position: relative;
+    }
+    
+    .gift-image::after {
+        content: '👆 Tap me!';
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        opacity: 0.8;
+        animation: tap-hint 2s ease-in-out infinite;
+    }
+    
+    .gift-image.mobile-revealed::after {
+        content: '✨ Revealed!';
+        background: rgba(76, 217, 100, 0.9);
+        color: white;
+        animation: none;
+    }
+    
+    @keyframes tap-hint {
+        0%, 100% { 
+            opacity: 0.8;
+            transform: translateX(-50%) scale(1);
+        }
+        50% { 
+            opacity: 1;
+            transform: translateX(-50%) scale(1.05);
+        }
+    }
+}
+
+/* Desktop instructions (default) */
+@media (min-width: 769px) {
+    .mobile-instruction {
+        display: none;
+    }
+    
+    .desktop-instruction {
+        display: inline;
+    }
 }
